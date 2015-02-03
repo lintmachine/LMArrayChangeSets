@@ -10,21 +10,23 @@
 Pod::Spec.new do |s|
   s.name             = "LMArrayChangeSets"
   s.version          = "0.1.0"
-  s.summary          = "A short description of LMArrayChangeSets."
+  s.summary          = "Categories to help in updating array-backed UITableViews and UICollectionViews with row/cell animations."
   s.description      = <<-DESC
-                       An optional longer description of LMArrayChangeSets
+This is a set of simple categories that help with a common pattern I use for updating array-backed UITableViews and UICollectionViews.
 
-                       * Markdown format.
-                       * Don't worry about the indent, we strip it!
+It extends NSArray to provide a simple diff functionality. You provide the initial array, the updated array, and an identity comparison block, and the method returns an NSDictionary of NSIndexSets with the inserted, deleted and moved indexes.
+
+Categories are provided for UITableView and UICollectionView that can take the IndexSet dictionary and perform the updates as a batch with row/cell animation.
+
                        DESC
-  s.homepage         = "https://github.com/<GITHUB_USERNAME>/LMArrayChangeSets"
+  s.homepage         = "https://github.com/lintmachine/LMArrayChangeSets"
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
   s.license          = 'MIT'
   s.author           = { "cdann" => "cdann@lintmachine.com" }
-  s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/LMArrayChangeSets.git", :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.source           = { :git => "https://github.com/lintmachine/LMArrayChangeSets.git", :tag => s.version.to_s }
+  s.social_media_url = 'https://twitter.com/lintmachine'
 
-  s.platform     = :ios, '7.0'
+  s.platform     = :ios, '6.0'
   s.requires_arc = true
 
   s.source_files = 'Pod/Classes/**/*'
