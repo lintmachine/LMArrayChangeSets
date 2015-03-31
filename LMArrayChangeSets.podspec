@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "LMArrayChangeSets"
-  s.version          = "0.1.0"
+  s.version          = "0.1.1"
   s.summary          = "Categories to help in updating array-backed UITableViews and UICollectionViews with row/cell animations."
   s.description      = <<-DESC
 This is a set of simple categories that help with a common pattern I use for updating array-backed UITableViews and UICollectionViews.
@@ -20,7 +20,6 @@ Categories are provided for UITableView and UICollectionView that can take the I
 
                        DESC
   s.homepage         = "https://github.com/lintmachine/LMArrayChangeSets"
-  # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
   s.license          = 'MIT'
   s.author           = { "cdann" => "cdann@lintmachine.com" }
   s.source           = { :git => "https://github.com/lintmachine/LMArrayChangeSets.git", :tag => s.version.to_s }
@@ -34,7 +33,4 @@ Categories are provided for UITableView and UICollectionView that can take the I
     'LMArrayChangeSets' => ['Pod/Assets/*.png']
   }
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
 end
