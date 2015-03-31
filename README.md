@@ -17,7 +17,7 @@ Categories are provided for UITableView and UICollectionView that take the Index
 
 #### UICollectionView
 
-```
+```objectivec
 - (void)updateWithItems:(NSArray *)items {
     
     NSDictionary* indexChangeSets = [NSArray indexChangeSetsForUpdatedList:items
