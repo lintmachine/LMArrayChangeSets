@@ -13,42 +13,106 @@ It extends NSArray to provide simple diff functionality. You provide the initial
 
 Categories are provided for UITableView and UICollectionView that take the IndexSet dictionary and perform the updates as a batch with row/cell animation.
 
-### UICollectionView example
+### Objective-C Examples
 
-    - (void)updateWithItems:(NSArray *)items {
-        
-        NSDictionary* indexChangeSets = [NSArray indexChangeSetsForUpdatedList:items
-                                                                  previousList:self.items
-                                                            identityComparator:^NSComparisonResult(NSDictionary* a, NSDictionary* b) {
-                                                                // This block should determine if the items in the list have the same identity or not
-                                                                return [a[@"id"] compare:b[@"id"]];
-                                                            }];
-        
+#### UICollectionView
 
-        
-        [self.collectionView performBatchUpdates:^{
-            self.items = items;
-            [self.collectionView updateSection:0 withChangeSet:indexChangeSets];
-        } completion:nil];
-    }
+```
+- (void)updateWithItems:(NSArray *)items {
+    
+    NSDictionary* indexChangeSets = [NSArray indexChangeSetsForUpdatedList:items
+                                                              previousList:self.items
+                                                        identityComparator:^NSComparisonResult(NSDictionary* a, NSDictionary* b) {
+                                                            // This block should determine if the items in the list have the same identity or not
+                                                            return [a[@"id"] compare:b[@"id"]];
+                                                        }];
+    
 
-### UITableView example
-
-    - (void)updateWithItems:(NSArray *)items {
-        
-        NSDictionary* indexChangeSets = [NSArray indexChangeSetsForUpdatedList:items
-                                                                  previousList:self.items
-                                                            identityComparator:^NSComparisonResult(NSDictionary* a, NSDictionary* b) {
-                                                                // This block should determine if the items in the list have the same identity or not
-                                                                return [a[@"id"] compare:b[@"id"]];
-                                                            }];
+    
+    [self.collectionView performBatchUpdates:^{
         self.items = items;
-        [self.tableView beginUpdates];
-        [self.tableView updateSection:0 withChangeSet:indexChangeSets];
-        [self.tableView endUpdates];
+        [self.collectionView updateSection:0 withChangeSet:indexChangeSets];
+    } completion:nil];
+}
+```
+
+#### UITableView
+
+```objectivec
+- (void)updateWithItems:(NSArray *)items {
+    
+    NSDictionary* indexChangeSets = [NSArray indexChangeSetsForUpdatedList:items
+                                                              previousList:self.items
+                                                        identityComparator:^NSComparisonResult(NSDictionary* a, NSDictionary* b) {
+                                                            // This block should determine if the items in the list have the same identity or not
+                                                            return [a[@"id"] compare:b[@"id"]];
+                                                        }];
+    self.items = items;
+    [self.tableView beginUpdates];
+    [self.tableView updateSection:0 withChangeSet:indexChangeSets];
+    [self.tableView endUpdates];
+}
+```
+
+### Swift Examples
+
+_Note:_ To use this library in Swift, you must import the library header file into your project's Bridging Header file.
+
+    #import "LMArrayChangeSets.h"
+
+More details about mixing Objective-C and Swift code are available [here](https://developer.apple.com/library/ios/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html).
+
+
+#### UICollectionView
+
+```swift
+func updateWithItems(items:NSArray) {
+
+    let indexChanges = NSArray.indexChangeSetsForUpdatedList(items, previousList: self.items) {
+            (anyA:AnyObject!, anyB:AnyObject!) -> NSComparisonResult in
+            let a = anyA as MyObject
+            let b = anyB as MyObject
+            // This should determine if the items have the same identity or not
+            return a.id.compare(b.id)
+    }
+    
+    self.collectionView!.performBatchUpdates({
+        () -> Void in
+        self.items = items
+        self.collectionView!.updateSection(0, withChangeSet:indexChanges)
+        },
+        completion:nil
+    )
+}
+```
+
+#### UITableView
+
+```swift
+func updateWithItems(items:NSArray) {
+
+    let indexChanges = NSArray.indexChangeSetsForUpdatedList(items, previousList: self.items) {
+            (anyA:AnyObject!, anyB:AnyObject!) -> NSComparisonResult in
+            let a = anyA as MyObject
+            let b = anyB as MyObject
+            // This should determine if the items have the same identity or not
+            return a.id.compare(b.id)
     }
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+    self.items = items
+    self.tableView!.beginUpdates()
+    self.tableView!.updateSection(0, withChangeSet:indexChanges)
+    self.tableView!.endUpdates()
+}
+```
+
+## Performance
+
+*Please Note:* The algorithm used to determine the change sets is not particularly efficient. O(N^2)
+
+The library was created with developer efficiency in mind, rather than raw performance. As such, it may not perform well with large data sets. In my experience, the performance has been perfectly acceptable for data sets with counts in the hundreds. If you plan to use this with larger data sets, you'll want to do some performance testing first and optimize your comparison routine.
+
+I recommend generating the change sets on a background thread.
 
 ## Requirements
 
@@ -60,6 +124,8 @@ LMArrayChangeSets is available through [CocoaPods](http://cocoapods.org). To ins
 it, simply add the following line to your Podfile:
 
     pod "LMArrayChangeSets"
+
+To run the example project, clone the repo, and run `pod install` from the Example directory first.
 
 ## Author
 
