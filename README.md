@@ -110,7 +110,9 @@ func updateWithItems(items:NSArray) {
 
 *Please Note:* The algorithm used to determine the change sets is not particularly efficient. O(N^2)
 
-The library was created with developer efficiency in mind, rather than raw performance. As such, it may not perform well with large data sets. In my experience, the performance has been perfectly acceptable for data sets with counts in the hundreds. If you plan to use this with larger data sets, you'll want to do some performance testing first and optimize your comparison routine.
+The library was created with developer efficiency in mind, rather than raw performance. As such, it may not perform well with large data sets. 
+
+In my experience, the performance has been perfectly acceptable for data sets with counts in the hundreds. If you plan to use this with larger data sets, you'll want to do some performance testing first and optimize your comparison routine.
 
 I recommend generating the change sets on a background thread.
 
