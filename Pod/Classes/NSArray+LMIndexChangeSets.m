@@ -40,7 +40,7 @@
     NSDictionary* indexChangeSets = @{
                                       @"deleted":  deleted  ? deleted  : [NSIndexSet indexSet],
                                       @"inserted": inserted ? inserted : [NSIndexSet indexSet],
-                                      @"moved":    moved    ? moved    : [NSIndexSet indexSet],
+                                      @"moved":    moved    ? moved    : [NSDictionary dictionary],
                                       };
     
     return indexChangeSets;
