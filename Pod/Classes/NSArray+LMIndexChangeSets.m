@@ -25,6 +25,7 @@
     }];
     
     NSMutableDictionary* moved = [NSMutableDictionary dictionary];
+    NSMutableIndexSet* unmoved = [NSMutableIndexSet indexSet];
     [previous enumerateObjectsUsingBlock:^(id prev, NSUInteger prevIndex, BOOL *stop) {
         if (![deleted containsIndex:prevIndex]) {
             NSUInteger currIndex = [updated indexOfObjectPassingTest:^BOOL(id curr, NSUInteger idx, BOOL *stop) {
@@ -34,14 +35,18 @@
             if (currIndex != prevIndex && ![[moved allValues] containsObject:@(currIndex)]) {
                 moved[@(prevIndex)] = @(currIndex);
             }
+            else {
+                [unmoved addIndex:currIndex];
+            }
         }
     }];
     
     NSDictionary* indexChangeSets = @{
-                                      @"deleted":  deleted  ? deleted  : [NSIndexSet indexSet],
-                                      @"inserted": inserted ? inserted : [NSIndexSet indexSet],
-                                      @"moved":    moved    ? moved    : [NSDictionary dictionary],
-                                      };
+        @"deleted"  : deleted   ? deleted  : [NSIndexSet indexSet],
+        @"inserted" : inserted  ? inserted : [NSIndexSet indexSet],
+        @"moved"    : moved,
+        @"unmoved"  : unmoved
+    };
     
     return indexChangeSets;
 }

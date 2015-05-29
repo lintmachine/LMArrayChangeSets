@@ -9,9 +9,9 @@
 
 This is a set of simple categories that help with a common pattern I use for updating array-backed UITableViews and UICollectionViews.
 
-It extends NSArray to provide simple diff functionality. You provide the initial array, the updated array, and an identity comparison block, and the method returns an NSDictionary of NSIndexSets with the inserted, deleted and moved indexes.
+It extends NSArray to provide simple diff functionality. You provide the initial array, the updated array, and an identity comparison block, and the method returns an NSDictionary of NSIndexSets with the inserted, deleted, moved and unmoved indexes.
 
-Categories are provided for UITableView and UICollectionView that take the IndexSet dictionary and perform the updates as a batch with row/cell animation.
+Categories are provided for UITableView and UICollectionView that take the IndexSet dictionary and perform the updates as a batch with row/cell animation. Items that have not moved from their initial position may optionally be reloaded.
 
 ### Objective-C Examples
 
@@ -31,7 +31,7 @@ Categories are provided for UITableView and UICollectionView that take the Index
     
     [self.collectionView performBatchUpdates:^{
         self.items = items;
-        [self.collectionView updateSection:0 withChangeSet:indexChangeSets];
+        [self.collectionView updateSection:0 withChangeSet:indexChangeSets reloadingUnmoved:YES];
     } completion:nil];
 }
 ```
@@ -101,7 +101,7 @@ func updateWithItems(items:NSArray) {
 
     self.items = items
     self.tableView!.beginUpdates()
-    self.tableView!.updateSection(0, withChangeSet:indexChanges)
+    self.tableView!.updateSection(0, withChangeSet:indexChanges, reloadingUnmoved:true)
     self.tableView!.endUpdates()
 }
 ```
