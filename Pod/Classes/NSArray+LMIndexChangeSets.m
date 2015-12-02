@@ -14,24 +14,27 @@
         }
         return NO;
     }];
-    
+
+    NSMutableArray* previousAfterDeletion = [previous mutableCopy];
+    [previousAfterDeletion removeObjectsAtIndexes:deleted];
+
     NSIndexSet* inserted = [updated indexesOfObjectsPassingTest:^BOOL(id prev, NSUInteger idx, BOOL *stop) {
-        if (previous == nil || [previous indexOfObjectPassingTest:^BOOL(id curr, NSUInteger idx, BOOL *stop) {
+        if (previousAfterDeletion == nil || [previousAfterDeletion indexOfObjectPassingTest:^BOOL(id curr, NSUInteger idx, BOOL *stop) {
             return (comparator(curr, prev) == NSOrderedSame);
         }] == NSNotFound) {
             return YES;
         }
         return NO;
     }];
-    
+
     NSMutableDictionary* moved = [NSMutableDictionary dictionary];
     NSMutableIndexSet* unmoved = [NSMutableIndexSet indexSet];
-    [previous enumerateObjectsUsingBlock:^(id prev, NSUInteger prevIndex, BOOL *stop) {
+    [previousAfterDeletion enumerateObjectsUsingBlock:^(id prev, NSUInteger prevIndex, BOOL *stop) {
         if (![deleted containsIndex:prevIndex]) {
             NSUInteger currIndex = [updated indexOfObjectPassingTest:^BOOL(id curr, NSUInteger idx, BOOL *stop) {
                 return (comparator(curr, prev) == NSOrderedSame);
             }];
-            
+
             if (currIndex != prevIndex && ![[moved allValues] containsObject:@(currIndex)]) {
                 moved[@(prevIndex)] = @(currIndex);
             }
@@ -40,14 +43,14 @@
             }
         }
     }];
-    
+
     NSDictionary* indexChangeSets = @{
         @"deleted"  : deleted   ? deleted  : [NSIndexSet indexSet],
         @"inserted" : inserted  ? inserted : [NSIndexSet indexSet],
         @"moved"    : moved,
         @"unmoved"  : unmoved
     };
-    
+
     return indexChangeSets;
 }
 
