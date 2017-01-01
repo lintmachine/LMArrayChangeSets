@@ -1,12 +1,12 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
-target 'LMArrayChangeSets', :exclusive => true do
+target 'LMArrayChangeSets' do
   pod "LMArrayChangeSets", :path => "../"
 end
 
-target 'Tests', :exclusive => true do
+target 'Tests' do
   pod "LMArrayChangeSets", :path => "../"
 
-  pod 'Specta', :git => 'https://github.com/specta/specta.git', :tag => 'v0.3.0.beta1'
+  pod 'Specta'
   pod 'Expecta'
 end
