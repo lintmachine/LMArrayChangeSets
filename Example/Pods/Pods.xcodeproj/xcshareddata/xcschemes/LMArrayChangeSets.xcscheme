@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4EE8D212D65FEDE3188947A66DBBFBC7"
+               BlueprintIdentifier = "DFFAC0CEDA5741C601820FD383B23667"
                BuildableName = "libLMArrayChangeSets.a"
                BlueprintName = "LMArrayChangeSets"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4EE8D212D65FEDE3188947A66DBBFBC7"
+            BlueprintIdentifier = "DFFAC0CEDA5741C601820FD383B23667"
             BuildableName = "libLMArrayChangeSets.a"
             BlueprintName = "LMArrayChangeSets"
             ReferencedContainer = "container:Pods.xcodeproj">
