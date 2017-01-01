@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "LMArrayChangeSets"
-  s.version          = "0.1.3"
+  s.version          = "1.0.0"
   s.summary          = "Categories to help in updating array-backed UITableViews and UICollectionViews with row/cell animations."
   s.description      = <<-DESC
 This is a set of simple categories that help with a common pattern I use for updating array-backed UITableViews and UICollectionViews.
