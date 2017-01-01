@@ -27,5 +27,11 @@
     "xcconfig": {
       "FRAMEWORK_SEARCH_PATHS": "$(inherited) $(DEVELOPER_FRAMEWORKS_DIR) \"$(PLATFORM_DIR)/Developer/Library/Frameworks\" \"$(DEVELOPER_DIR)/Platforms/iPhoneSimulator.platform/Developer/Library/Frameworks\""
     }
+  },
+  "platforms": {
+    "osx": null,
+    "ios": null,
+    "tvos": null,
+    "watchos": null
   }
 }
