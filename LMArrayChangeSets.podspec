@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "LMArrayChangeSets"
-  s.version          = "1.0.0"
+  s.version          = "1.0.1"
   s.summary          = "Categories to help in updating array-backed UITableViews and UICollectionViews with row/cell animations."
   s.description      = <<-DESC
 This is a set of simple categories that help with a common pattern I use for updating array-backed UITableViews and UICollectionViews.
@@ -25,12 +25,9 @@ Categories are provided for UITableView and UICollectionView that can take the I
   s.source           = { :git => "https://github.com/lintmachine/LMArrayChangeSets.git", :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/lintmachine'
 
-  s.platform     = :ios, '6.0'
+  s.platform     = :ios, '8.0'
   s.requires_arc = true
 
   s.source_files = 'Pod/Classes/**/*'
-  s.resource_bundles = {
-    'LMArrayChangeSets' => ['Pod/Assets/*.png']
-  }
 
 end
